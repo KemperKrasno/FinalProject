@@ -29,6 +29,7 @@ class MainPageLocators(object):
     Loc_vip = (By.CSS_SELECTOR, 'div#footerContent > div:nth-of-type(2) > ul:nth-of-type(4) > li:nth-of-type(4) > a')
     Loc_marketplace = (By.CSS_SELECTOR, 'div#footerContent > div:nth-of-type(2) > ul:nth-of-type(4) > li:nth-of-type(5) > a')
     Loc_myalza = (By.CSS_SELECTOR, 'a#lblMujUcet')
+    Loc_register = (By.ID, 'registerLink')
 
 class SearchResultsPageLocators(object):
 
@@ -82,5 +83,3 @@ class Item_card(object):
     Loc_parametrs_info = (By.CSS_SELECTOR, 'div#parametry')
     Loc_recence_info = (By.CSS_SELECTOR, 'div#recenze > div > div > div:nth-of-type(2)')
     Loc_poradna_info = (By.CSS_SELECTOR, 'div#discussionPosts')
-
-
