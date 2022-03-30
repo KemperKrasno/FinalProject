@@ -7,15 +7,12 @@ from locators import UserPageLocators
 from locators import Item_card
 
 class BasePage(object):
-    """Base class to initialize the base page that will be called from all
-    pages"""
 
     def __init__(self, driver):
         self.driver = driver
 
 
 class MainPage(BasePage):
-    """Home page action methods come here. I.e. Python.org"""
 
     def click_search_button(self):
 
@@ -26,6 +23,14 @@ class MainPage(BasePage):
 
         element = pytest.driver.find_element(*MainPageLocators.Loc_search_line)
         element.send_keys(value)
+
+
+    def new_reg(self):
+        element = pytest.driver.find_element(*MainPageLocators.Loc_login)
+        element.click()
+        pytest.driver.switch_to.frame(pytest.driver.find_element(*MainPageLocators.Loc_login_iframe))
+        element = pytest.driver.find_element(*MainPageLocators.Loc_register)
+        element.click()
 
 
 
@@ -91,13 +96,13 @@ class MainPage(BasePage):
 
     def get_fotos(self):
         element = pytest.driver.find_element(*Item_card.Loc_foto)
-        element.click()
+        pytest.driver.execute_script("arguments[0].click();", element)
         elements = pytest.driver.find_elements(*Item_card.Loc_fotos)
         return elements
 
     def get_recence(self):
         element = pytest.driver.find_element(*Item_card.Loc_recence)
-        element.click()
+        pytest.driver.execute_script("arguments[0].click();", element)
         element = pytest.driver.find_element(*Item_card.Loc_recence_info)
         return element.text
 
@@ -107,17 +112,18 @@ class MainPage(BasePage):
 
     def get_poradna(self):
         element = pytest.driver.find_element(*Item_card.Loc_poradna)
-        element.click()
+        pytest.driver.execute_script("arguments[0].click();", element)
         element = pytest.driver.find_element(*Item_card.Loc_poradna_info)
         return element.text
 
     def go_home_card(self):
         element = pytest.driver.find_element(*Item_card.Loc_home)
-        return element
+        pytest.driver.execute_script("arguments[0].click();", element)
+
 
     def get_params(self):
         element = pytest.driver.find_element(*Item_card.Loc_parametrs)
-        element.click()
+        pytest.driver.execute_script("arguments[0].click();", element)
         element = pytest.driver.find_element(*Item_card.Loc_parametrs_info)
         return element.text
 
@@ -155,11 +161,13 @@ class MainPage(BasePage):
 
     def cart_item_count_up(self):
         element = pytest.driver.find_element(*CartPageLocators.Cart_item_countup)
-        return element
+        pytest.driver.execute_script("arguments[0].click();", element)
+
 
     def cart_item_count_down(self):
         element = pytest.driver.find_element(*CartPageLocators.Cart_item_countdown)
-        return element
+        pytest.driver.execute_script("arguments[0].click();", element)
+
 
     def get_cart_item_count(self):
         element = pytest.driver.find_element(*CartPageLocators.Cart_item_count)
