@@ -2,12 +2,11 @@ import pytest
 import page
 from conftest import browser
 
-
-
-
-
 # test 1
+
+
 def test_login_sucsess(browser):
+
    site = page.MainPage(browser)
    site.login_fill_and_click('putinov.tb@gmail.com', 'skillfactory')
    assert pytest.driver.find_element_by_id('lblUser').text == "Moje Alza - Timofey Bystrov"
@@ -67,7 +66,7 @@ def test_item_card_foto():
 
 
 # test 8
-def item_card_fotos():
+def test_item_card_fotos():
    site = page.MainPage(browser)
    site.enter_search_line('usb')
    site.click_search_button()
@@ -128,7 +127,7 @@ def test_item_card_poradna():
 
 
 # test 14
-def item_card_score():
+def test_item_card_score():
    site = page.MainPage(browser)
    site.enter_search_line('usb')
    site.click_search_button()
@@ -240,7 +239,7 @@ def test_cart_item_countup():
    site.add_item_to_cart()
    site.enter_cart()
    before = site.get_cart_item_count()
-   site.cart_item_count_up().click()
+   site.cart_item_count_up()
    after = site.get_cart_item_count()
    assert before < after
 
@@ -253,7 +252,7 @@ def test_cart_item_countdown():
    site.add_item_to_cart()
    site.enter_cart()
    before = site.get_cart_item_count()
-   site.cart_item_count_up().click()
+   site.cart_item_count_down()
    after = site.get_cart_item_count()
    assert before > after
 
@@ -470,4 +469,8 @@ def test_myalza_login():
 
 
 # test 50
-#def test_new_user():
+def test_new_user():
+   site = page.MainPage(browser)
+   site.new_reg()
+   text = pytest.driver.find_element_by_css_selector('div#h1 > div > span').text
+   assert text == 'Registrace'
